@@ -3,7 +3,7 @@ add_library(game_lib game.cpp)
 target_link_libraries(game_lib libchess-static)
 
 # add the executable
-add_executable(game_main main.cpp)
+add_executable(game_main game_main.cpp)
 
 pybind11_add_module(game game_bindings.cpp)
 

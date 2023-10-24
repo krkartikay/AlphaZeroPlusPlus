@@ -5,7 +5,7 @@
 int main() {
   GameState gameState;
 
-  gameState.printBoard();
+  gameState.print_board();
 
   return 0;
 }

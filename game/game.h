@@ -5,6 +5,8 @@
 #include <optional>
 #include <vector>
 
+constexpr int kNumActions = 64 * 64;
+
 enum class Player { NONE = 0, WHITE = 1, BLACK = -1 };
 
 class GameState {
@@ -12,7 +14,18 @@ class GameState {
   GameState();
   GameState(const GameState& other);
 
-  void printBoard() const;
+  Player player() const;
+  Player winner() const;
+
+  bool terminated() const;
+  std::vector<int> legal_actions() const;
+
+  GameState next_state(int action) const;
+
+  void to_image() const;  // TODO implement this one later
+
+  void print_board() const;
 
  private:
+  libchess::Position position_;
 };
