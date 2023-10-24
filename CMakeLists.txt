@@ -4,13 +4,19 @@ cmake_minimum_required(VERSION 3.22)
 project(AlphaZeroPlusPlus)
 
 # specify the C++ standard
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # python bindings using pybind
 add_subdirectory(pybind11)
+
+# chess library libchess
+add_subdirectory(libchess)
+include_directories("libchess/src")
+
+# Game interface
 add_subdirectory(game)
 
 # Set the install prefix to the site-packages directory of the virtual environment

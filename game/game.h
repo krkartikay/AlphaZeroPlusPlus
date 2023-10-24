@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include <libchess/position.hpp>
 #include <optional>
 #include <vector>
 
