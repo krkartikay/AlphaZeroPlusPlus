@@ -13,8 +13,8 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 add_subdirectory(pybind11)
 
 # chess library libchess
-add_subdirectory(libchess)
-include_directories("libchess/src")
+add_subdirectory(chess-library)
+include_directories("chess-library/include")
 
 # Game interface
 add_subdirectory(game)

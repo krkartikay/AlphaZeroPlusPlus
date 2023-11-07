@@ -1,9 +1,10 @@
 #pragma once
 
 #include <array>
-#include <libchess/position.hpp>
 #include <optional>
 #include <vector>
+
+#include "chess.hpp"
 
 constexpr int kNumActions = 64 * 64;
 
@@ -27,5 +28,5 @@ class GameState {
   void print_board() const;
 
  private:
-  libchess::Position position_;
+  chess::Board position_;
 };

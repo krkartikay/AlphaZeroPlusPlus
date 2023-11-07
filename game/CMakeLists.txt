@@ -1,6 +1,5 @@
 # add the game library
 add_library(game_lib game.cpp)
-target_link_libraries(game_lib libchess-static)
 
 # add the executable
 add_executable(game_main game_main.cpp)
