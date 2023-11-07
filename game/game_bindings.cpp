@@ -17,6 +17,7 @@ PYBIND11_MODULE(game, m) {
   py::class_<GameState>(m, "GameState")
       .def(py::init<>())
       .def(py::init<const GameState &>())
+      .def(py::init<const std::string &>())
       .def("player", &GameState::player)
       .def("winner", &GameState::winner)
       .def("terminated", &GameState::terminated)

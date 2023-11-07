@@ -8,12 +8,20 @@
 
 constexpr int kNumActions = 64 * 64;
 
-enum class Player { NONE = 0, WHITE = 1, BLACK = -1 };
+enum class Player {
+  NONE = 0,
+  WHITE = 1,
+  BLACK = -1,
+};
+
+Player other_player(Player p);
 
 class GameState {
  public:
   GameState();
   GameState(const GameState& other);
+
+  GameState(const std::string& start_fen);
 
   Player player() const;
   Player winner() const;
