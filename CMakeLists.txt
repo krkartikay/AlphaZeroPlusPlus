@@ -10,6 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # python bindings using pybind
+set(PYBIND11_FINDPYTHON ON)
 add_subdirectory(pybind11)
 
 # chess library libchess
