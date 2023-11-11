@@ -50,23 +50,39 @@ std::vector<int> GameState::legal_actions() const {
   return actions;
 }
 
+bool GameState::isCastlingMove(chess::Square source,
+                               chess::Square destination) const {
+  chess::Piece sourcePiece = position_.at(source);
+  chess::Piece destinationPiece = position_.at(destination);
+  return chess::utils::typeOfPiece(sourcePiece) == chess::PieceType::KING &&
+         chess::utils::typeOfPiece(destinationPiece) ==
+             chess::PieceType::ROOK &&
+         position_.color(sourcePiece) == position_.color(destinationPiece);
+}
+
+chess::Move GameState::createMove(int source, int destination,
+                                  int action) const {
+  int promotionPiece = action % 5;
+  chess::Square sourceSquare = static_cast<chess::Square>(source);
+  chess::Square destinationSquare = static_cast<chess::Square>(destination);
+  if (promotionPiece != 0) {
+    return chess::Move::make<chess::Move::PROMOTION>(
+        sourceSquare, destinationSquare,
+        static_cast<chess::PieceType>(promotionPiece));
+  } else if (isCastlingMove(sourceSquare, destinationSquare)) {
+    return chess::Move::make<chess::Move::CASTLING>(sourceSquare,
+                                                    destinationSquare);
+  }
+  return chess::Move::make<chess::Move::NORMAL>(sourceSquare,
+                                                destinationSquare);
+}
+
 GameState GameState::next_state(int action) const {
   GameState new_state(*this);
-  int source = action / (64 * 5);
-  int destination = (action / 5) % 64;
-  int promotionPiece = action % 5;
-  if (promotionPiece != 0) {
-    chess::Move move = chess::Move::make<chess::Move::PROMOTION>(
-        static_cast<chess::Square>(source),
-        static_cast<chess::Square>(destination),
-        static_cast<chess::PieceType>(promotionPiece));
-    new_state.position_.makeMove(move);
-  } else {
-    chess::Move move = chess::Move::make<chess::Move::NORMAL>(
-        static_cast<chess::Square>(source),
-        static_cast<chess::Square>(destination));
-    new_state.position_.makeMove(move);
-  }
+  int sourceSquare = action / (64 * 5);
+  int destinationSquare = (action / 5) % 64;
+  chess::Move move = createMove(sourceSquare, destinationSquare, action);
+  new_state.position_.makeMove(move);
   return new_state;
 }
 

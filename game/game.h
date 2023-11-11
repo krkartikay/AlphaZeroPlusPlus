@@ -37,4 +37,8 @@ class GameState {
 
  private:
   chess::Board position_;
+
+  bool isCastlingMove(chess::Square source, chess::Square destination) const;
+
+  chess::Move createMove(int source, int destination, int action) const;
 };
